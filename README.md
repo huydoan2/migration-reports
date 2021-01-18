@@ -16,3 +16,9 @@ Pre-migration and post-migration Postgres databases are provided in two docker c
 1. `corrupted-during-migration.json`: contains entries that are corrupted during the migration.
 2. `missing-during-migration`: contains entries that exist in the pre-migration database but don't exist in the post-migration one.
 3. `new-entries-after-migration.json`:  contains entries that exist in the post-migration database but don't exist in the pre-migration one.
+
+# Run
+In terminal, at project root directory, run `npm run start`.
+
+# Test
+In terminal, at project root directory, run `npm run test`.
