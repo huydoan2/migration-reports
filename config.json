@@ -1,0 +1,16 @@
+{
+    "oldDb": {
+        "user": "old",
+        "password": "hehehe",
+        "host": "localhost",
+        "database": "old",
+        "port": "5432"
+    },
+    "newDb": {
+        "user": "new",
+        "password": "hahaha",
+        "host": "localhost",
+        "database": "new",
+        "port": "5433"
+    }
+}

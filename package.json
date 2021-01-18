@@ -1,0 +1,24 @@
+{
+  "name": "migration-report",
+  "version": "1.0.0",
+  "description": "Generate reports of account migration",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huydoan2/migration-reports.git"
+  },
+  "author": "Huy Doan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huydoan2/migration-reports/issues"
+  },
+  "homepage": "https://github.com/huydoan2/migration-reports#readme",
+  "dependencies": {
+    "lodash": "^4.17.20",
+    "pg": "^8.5.1"
+  }
+}
