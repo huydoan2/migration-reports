@@ -4,8 +4,8 @@
   "description": "Generate reports of account migration",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "npm test"
+    "start": "node src/index.js",
+    "test": "mocha test/**/**.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,9 @@
   "dependencies": {
     "lodash": "^4.17.20",
     "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
   }
 }

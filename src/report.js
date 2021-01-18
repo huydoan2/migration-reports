@@ -5,10 +5,10 @@
  *   
 ***/
 
-const { Pool, Client } = require('pg');
+const { Client } = require('pg');
 const fs = require('fs');
 const keyBy = require('lodash/keyBy');
-const config = require('./config.json');
+const config = require('../config.json');
 
 const oldClient = new Client(config.oldDb);
 const newClient = new Client(config.newDb);
@@ -42,7 +42,7 @@ async function cleanUp(dropTable) {
     .catch(err => console.error('Error disconnecting to New DB', err.stack));
 }
 
-async function main() {
+async function run() {
   const newTableName = `accounts_new_${Date.now()}`;
 
   try {
@@ -82,7 +82,9 @@ async function main() {
             )
     `
     temp = await oldClient.query(query)
-    fs.writeFile('missing-during-migration.json', JSON.stringify(temp.rows, null, 2), (err) => console.log(err));
+    fs.writeFile('missing-during-migration.json', JSON.stringify(temp.rows, null, 2), (err) => {
+      if (err) console.log(err)
+    });
 
 
     // Look for new entries in new data
@@ -97,7 +99,9 @@ async function main() {
             )
     `
     temp = await oldClient.query(query)
-    fs.writeFile('new-entries-after-migration.json', JSON.stringify(temp.rows, null, 2), (err) => console.log(err));
+    fs.writeFile('new-entries-after-migration.json', JSON.stringify(temp.rows, null, 2), (err) => {
+      if (err) console.log(err)
+    });
 
     // Look for corrupted data during migration
     query = `
@@ -108,7 +112,9 @@ async function main() {
     `
 
     temp = await oldClient.query(query)
-    fs.writeFile('corrupted-during-migration.json', JSON.stringify(temp.rows, null, 2), (err) => console.log(err));
+    fs.writeFile('corrupted-during-migration.json', JSON.stringify(temp.rows, null, 2), (err) => {
+      if (err) console.log(err)
+    });
   } catch (error) {
     console.log('Encountered error during execution', error);
   } finally {
@@ -117,5 +123,4 @@ async function main() {
 
 }
 
-// invoke main function
-main();
+module.exports = run;
