@@ -7,7 +7,6 @@
 
 const { Client } = require('pg');
 const fs = require('fs');
-const keyBy = require('lodash/keyBy');
 const config = require('../config.json');
 
 const oldClient = new Client(config.oldDb);
@@ -69,7 +68,6 @@ async function run() {
 
     await oldClient.query(query);
 
-
     // Look for missing entries in new data
     query = `
     SELECT  old.*
@@ -80,7 +78,8 @@ async function run() {
             FROM    ${newTableName} new
             WHERE   new.id = old.id
             )
-    `
+    `;
+
     temp = await oldClient.query(query)
     fs.writeFile('missing-during-migration.json', JSON.stringify(temp.rows, null, 2), (err) => {
       if (err) console.log(err)
@@ -97,7 +96,8 @@ async function run() {
             FROM    accounts old
             WHERE   old.id = new.id
             )
-    `
+    `;
+
     temp = await oldClient.query(query)
     fs.writeFile('new-entries-after-migration.json', JSON.stringify(temp.rows, null, 2), (err) => {
       if (err) console.log(err)
@@ -109,7 +109,7 @@ async function run() {
     FROM accounts old JOIN ${newTableName} new
     ON old.id = new.id
     WHERE old.name != new.name OR old.email != new.email
-    `
+    `;
 
     temp = await oldClient.query(query)
     fs.writeFile('corrupted-during-migration.json', JSON.stringify(temp.rows, null, 2), (err) => {

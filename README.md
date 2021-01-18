@@ -21,6 +21,8 @@ Pre-migration and post-migration Postgres databases are provided in two docker c
 In terminal, at project root directory, run `npm install`.
 
 # Run
+Make sure the database containers are running and listening to requests.
+
 In terminal, at project root directory, run `npm run start`.
 
 # Test
