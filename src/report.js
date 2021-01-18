@@ -2,6 +2,7 @@
  * Assummptions:
  * 1. All data fits in memory
  * 2. Database provider allows big JOIN
+ * 3. The environment and network are perfect.
  *   
 ***/
 
